@@ -1,0 +1,46 @@
+describe('Modul Add to Cart - Checkout', () => {
+    it('Add to Cart', () => {
+      cy.visit('https://demowebshop.tricentis.com/login/')
+      cy.get('#Email').type('MuhammadNurHuda@sanbercode45.com')
+      cy.get('#Password').type('hudahuda')
+      cy.get('form > .buttons > .button-1').click()
+      cy.get(':nth-child(3) > .product-item > .details > .add-info > .buttons > .button-2').click()
+
+        //Validasi
+      cy.get('.content').should('contain.text','The product has been added to your shopping cart')
+      cy.get('.ico-logout').should('be.visible')
+      cy.get('.header-links > ul > :nth-child(1) > .account').should('be.visible')
+    })
+
+    it('Checkout Cart', () => {
+      cy.visit('https://demowebshop.tricentis.com/login/')
+      cy.get('#Email').type('MuhammadNurHuda@sanbercode45.com')
+      cy.get('#Password').type('hudahuda')
+      cy.get('form > .buttons > .button-1').click()
+      cy.get(':nth-child(3) > .product-item > .details > .add-info > .buttons > .button-2').click()
+      cy.get('.ico-cart > .cart-label').click()
+      cy.get('.remove-from-cart > input').click()
+      cy.get('#CountryId').select('Indonesia')
+      cy.get('#termsofservice').click()
+      cy.get('#checkout').click()
+      cy.get('#billing-address-select').select('New Address')
+      cy.get('#BillingNewAddress_CountryId').select('Indonesia')
+      cy.get('#BillingNewAddress_City').type('Bandung')
+      cy.get('#BillingNewAddress_Address1').type('Kopo Area')
+      cy.get('#BillingNewAddress_ZipPostalCode').type('40225')
+      cy.get('#BillingNewAddress_PhoneNumber').type('089666660333')
+      cy.get('#billing-buttons-container > .button-1').click()
+      cy.get('#shipping-buttons-container > .button-1').click()
+      cy.get('#shipping-method-buttons-container > .button-1').click()
+      cy.get('#payment-method-buttons-container > .button-1').click()
+      cy.get('#payment-info-buttons-container > .button-1').click()
+      cy.get('#confirm-order-buttons-container > .button-1').click()
+
+        //Validasi
+      cy.get('h1').should('contain.text','Thank you')
+      cy.get('strong').should('contain.text','Your order has been successfully processed!')
+      cy.get('.details > :nth-child(2) > a').should('be.visible')
+      cy.get('.ico-logout').should('be.visible')
+      cy.get('.header-links > ul > :nth-child(1) > .account').should('be.visible')
+    })
+})
