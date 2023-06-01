@@ -3,6 +3,7 @@ Muhammad Nur Huda - Quality Assurance 45
 
 Creating Automation Test, with details :
   - Website : https://demowebshop.tricentis.com/
+  - The coding file at folder "cypress - e2e - tricentist"
   - Created Scenarios & Test Cases :
       -  Register Success
       -  Register Failed already Registered
